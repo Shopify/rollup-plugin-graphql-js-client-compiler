@@ -1,0 +1,12 @@
+node_modules
+*.log
+.DS_Store
+/index.es.js
+/index.es.js.map
+/index.js
+/index.js.map
+.tmp
+test/fixtures/schema.json
+test/fixtures/types.js
+/cli.js
+/cli.js.map
