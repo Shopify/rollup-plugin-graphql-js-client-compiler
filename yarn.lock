@@ -1551,7 +1551,7 @@ glob@7.1.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5:
+glob@7.1.2, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -1608,9 +1608,9 @@ graceful-fs@^4.1.2:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-graphql-js-client-compiler@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/graphql-js-client-compiler/-/graphql-js-client-compiler-0.1.0.tgz#914b801b27f154abe8416d67791ea37c6324c3a2"
+graphql-js-client-compiler@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/graphql-js-client-compiler/-/graphql-js-client-compiler-0.1.1.tgz#331be217f7535be82c642f9726f433dff9493d5b"
   dependencies:
     babel-generator "6.25.0"
     babel-types "6.25.0"

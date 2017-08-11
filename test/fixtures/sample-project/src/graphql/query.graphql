@@ -1,0 +1,11 @@
+fragment ProductFragment on Product {
+  id
+  name
+  price
+}
+
+query FancyQuery($id: ID!) {
+  node(id: $id) {
+    ...ProductFragment
+  }
+}
