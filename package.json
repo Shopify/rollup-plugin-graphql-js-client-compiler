@@ -5,7 +5,10 @@
   "main": "index.js",
   "module": "index.es.js",
   "jsnext:main": "index.es.js",
-  "repository": "git@github.com:Shopify/graphql-js-client-compiler.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Shopify/rollup-plugin-graphql-js-client-compiler.git"
+  },
   "author": "Mina Smart <mina.smart@shopify.com>",
   "license": "MIT",
   "devDependencies": {
@@ -20,8 +23,9 @@
     "rollup-plugin-node-resolve": "3.0.0"
   },
   "dependencies": {
-    "rollup-pluginutils": "2.0.1",
-    "graphql-js-client-compiler": "0.1.0"
+    "glob": "7.1.2",
+    "graphql-js-client-compiler": "0.1.1",
+    "rollup-pluginutils": "2.0.1"
   },
   "scripts": {
     "test": "yarn lint && yarn mocha",
@@ -36,10 +40,6 @@
   "keywords": [
     "rollup,es6,esnext"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Shopify/rollup-plugin-graphql-js-client-compiler.git"
-  },
   "homepage": "https://github.com/Shopify/rollup-plugin-graphql-js-client-compiler",
   "bugs": {
     "url": "https://github.com/Shopify/rollup-plugin-graphql-js-client-compiler/issues"
