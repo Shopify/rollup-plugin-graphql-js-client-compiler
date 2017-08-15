@@ -39,6 +39,8 @@ client.send(query, {someVariable: 'value'}).then(({data, model}) => {
 });
 ```
 
+__NOTE:__ The schema can be an IDL file with the `.graphql` extension, or an introspection response in JSON format with the `.json` extension.
+
 This will include the entire schema, as represented with [graphql-js-schema](https://github.com/Shopify/graphql-js-schema).
 
 ### Production
