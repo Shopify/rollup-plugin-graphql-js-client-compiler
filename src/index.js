@@ -73,10 +73,26 @@ function optimizeAndCompileSchema({schema, profileDocuments, compiler}) {
 }
 
 function prependFragments(source, id) {
+  return recursivelySourceFragmentFiles(source, id).then((fragments) => {
+    return source.concat(fragments.map((fragment) => fragment.body).join('\n'));
+  });
+}
+
+function recursivelySourceFragmentFiles(source, id) {
   const fragmentFiles = fragmentFilesForDocument(id, source);
 
+  if (fragmentFiles.length === 0) {
+    return Promise.resolve([]);
+  }
+
   return readFiles(fragmentFiles).then((fragments) => {
-    return source.concat(fragments.map((fragment) => fragment.body).join('\n'));
+    return Promise.all(fragments.map((fragment) => {
+      return recursivelySourceFragmentFiles(fragment.body, fragment.path);
+    }).concat(Promise.resolve(fragments)));
+  }).then((fragmentLists) => {
+    return fragmentLists.reduce((acc, fragments) => {
+      return acc.concat(fragments);
+    }, []);
   });
 }
 

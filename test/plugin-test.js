@@ -100,6 +100,20 @@ suite('plugin-test', () => {
     });
   });
 
+  test('it resolves fragment files from other fragment files', () => {
+    return rollup({
+      entry: 'src/index-with-fragments-in-fragments.js',
+      plugins: [plugin()]
+    }).then((bundle) => {
+      return bundle.generate({format: 'es'});
+    }).then(({code}) => {
+      assertIncludes(code, 'const document = client.document();');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.defineFragment("ProductFragmentNested", "Product"');
+      assertIncludes(code, 'document.defineFragment("ProductFragment", "Product"');
+    });
+  });
+
   test('it resolves, compiles, and optimizes graphql schemas', () => {
     return rollup({
       entry: 'src/index-with-schema.js',
