@@ -1,0 +1,3 @@
+fragment ShopFragmentTwo on Shop {
+  ...ShopFragment
+}

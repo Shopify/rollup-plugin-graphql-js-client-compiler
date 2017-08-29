@@ -126,6 +126,17 @@ suite('plugin-test', () => {
     });
   });
 
+  test('it detects circular references', () => {
+    return rollup({
+      entry: 'circular-src/index.js',
+      plugins: [plugin()]
+    }).then(() => {
+      assert.ok(false, 'this should not compile');
+    }).catch((error) => {
+      assert.ok(error.message.match(/Max fragment depth exceeded/), 'it timed out');
+    });
+  });
+
   test('it resolves, compiles, and optimizes graphql schemas', () => {
     return rollup({
       entry: 'src/index-with-schema.js',

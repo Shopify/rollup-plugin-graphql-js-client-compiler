@@ -78,7 +78,12 @@ function prependFragments(source, id) {
   });
 }
 
-function recursivelySourceFragmentFiles(source, id) {
+function recursivelySourceFragmentFiles(source, id, depth = 0) {
+  if (depth > 100) {
+    throw new Error(`Max fragment depth exceeded. Fragments can not link to each other more than 100 deep.
+This may indicated a circular reference.`);
+  }
+
   const fragmentFiles = fragmentFilesForDocument(id, source);
 
   if (fragmentFiles.length === 0) {
@@ -87,7 +92,7 @@ function recursivelySourceFragmentFiles(source, id) {
 
   return readFiles(fragmentFiles).then((fragments) => {
     return Promise.all(fragments.map((fragment) => {
-      return recursivelySourceFragmentFiles(fragment.body, fragment.path);
+      return recursivelySourceFragmentFiles(fragment.body, fragment.path, depth + 1);
     }).concat(Promise.resolve(fragments)));
   }).then((fragmentLists) => {
     return fragmentLists.reduce((acc, fragments) => {
