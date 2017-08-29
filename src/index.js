@@ -93,6 +93,14 @@ function recursivelySourceFragmentFiles(source, id) {
     return fragmentLists.reduce((acc, fragments) => {
       return acc.concat(fragments);
     }, []);
+  }).then((fragments) => {
+    return fragments.reduce((acc, fragment) => {
+      if (!acc.find((uniqueFragment) => uniqueFragment.path === fragment.path)) {
+        acc.push(fragment);
+      }
+
+      return acc;
+    }, []);
   });
 }
 

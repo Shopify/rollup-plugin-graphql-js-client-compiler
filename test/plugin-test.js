@@ -114,6 +114,18 @@ suite('plugin-test', () => {
     });
   });
 
+  test('it deduplicates fragments', () => {
+    return rollup({
+      entry: 'src/index-with-duplicate-fragments.js',
+      plugins: [plugin()]
+    }).then((bundle) => {
+      return bundle.generate({format: 'es'});
+    }).then(({code}) => {
+      assertIncludes(code, 'const document = client.document();');
+      assert.equal(code.match(/document.defineFragment\("ProductFragment", "Product"/g).length, 1);
+    });
+  });
+
   test('it resolves, compiles, and optimizes graphql schemas', () => {
     return rollup({
       entry: 'src/index-with-schema.js',
