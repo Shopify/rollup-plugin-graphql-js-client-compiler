@@ -73,10 +73,39 @@ function optimizeAndCompileSchema({schema, profileDocuments, compiler}) {
 }
 
 function prependFragments(source, id) {
+  return recursivelySourceFragmentFiles(source, id).then((fragments) => {
+    return source.concat(fragments.map((fragment) => fragment.body).join('\n'));
+  });
+}
+
+function recursivelySourceFragmentFiles(source, id, depth = 0) {
+  if (depth > 100) {
+    throw new Error(`Max fragment depth exceeded. Fragments can not link to each other more than 100 deep.
+This may indicated a circular reference.`);
+  }
+
   const fragmentFiles = fragmentFilesForDocument(id, source);
 
+  if (fragmentFiles.length === 0) {
+    return Promise.resolve([]);
+  }
+
   return readFiles(fragmentFiles).then((fragments) => {
-    return source.concat(fragments.map((fragment) => fragment.body).join('\n'));
+    return Promise.all(fragments.map((fragment) => {
+      return recursivelySourceFragmentFiles(fragment.body, fragment.path, depth + 1);
+    }).concat(Promise.resolve(fragments)));
+  }).then((fragmentLists) => {
+    return fragmentLists.reduce((acc, fragments) => {
+      return acc.concat(fragments);
+    }, []);
+  }).then((fragments) => {
+    return fragments.reduce((acc, fragment) => {
+      if (!acc.find((uniqueFragment) => uniqueFragment.path === fragment.path)) {
+        acc.push(fragment);
+      }
+
+      return acc;
+    }, []);
   });
 }
 

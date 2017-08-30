@@ -1,0 +1,6 @@
+query FancyQuery($id: ID!) {
+  node(id: $id) {
+    ...ProductFragment
+    ...ProductFragment
+  }
+}

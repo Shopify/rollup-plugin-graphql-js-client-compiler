@@ -1,0 +1,4 @@
+fragment ProductFragmentNested on Product {
+  handle
+  ...ProductFragment
+}

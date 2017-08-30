@@ -100,6 +100,43 @@ suite('plugin-test', () => {
     });
   });
 
+  test('it resolves fragment files from other fragment files', () => {
+    return rollup({
+      entry: 'src/index-with-fragments-in-fragments.js',
+      plugins: [plugin()]
+    }).then((bundle) => {
+      return bundle.generate({format: 'es'});
+    }).then(({code}) => {
+      assertIncludes(code, 'const document = client.document();');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.defineFragment("ProductFragmentNested", "Product"');
+      assertIncludes(code, 'document.defineFragment("ProductFragment", "Product"');
+    });
+  });
+
+  test('it deduplicates fragments', () => {
+    return rollup({
+      entry: 'src/index-with-duplicate-fragments.js',
+      plugins: [plugin()]
+    }).then((bundle) => {
+      return bundle.generate({format: 'es'});
+    }).then(({code}) => {
+      assertIncludes(code, 'const document = client.document();');
+      assert.equal(code.match(/document.defineFragment\("ProductFragment", "Product"/g).length, 1);
+    });
+  });
+
+  test('it detects circular references', () => {
+    return rollup({
+      entry: 'circular-src/index.js',
+      plugins: [plugin()]
+    }).then(() => {
+      assert.ok(false, 'this should not compile');
+    }).catch((error) => {
+      assert.ok(error.message.match(/Max fragment depth exceeded/), 'it timed out');
+    });
+  });
+
   test('it resolves, compiles, and optimizes graphql schemas', () => {
     return rollup({
       entry: 'src/index-with-schema.js',
