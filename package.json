@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-graphql-js-client-compiler",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Compile *.graphql files into es6 modules",
   "main": "index.js",
   "module": "index.es.js",
