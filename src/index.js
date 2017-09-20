@@ -128,28 +128,41 @@ export default function plugin({schema, optimize, profileDocuments, include, exc
         return;
       }
 
-      if (isSchema(id)) {
-        if (optimize) {
-          const opts = {
-            schema: source,
-            profileDocuments
-          };
+      function compile() {
+        if (isSchema(id)) {
+          if (optimize) {
+            const opts = {
+              schema: source,
+              profileDocuments
+            };
 
-          if (isJson(source)) {
-            opts.compiler = compileOptimizedSchemaJson;
+            if (isJson(source)) {
+              opts.compiler = compileOptimizedSchemaJson;
+            } else {
+              opts.compiler = compileOptimizedSchemaIDL;
+            }
+
+            return optimizeAndCompileSchema(opts);
+          } else if (isJson(source)) {
+            return compileSchemaJson(source);
           } else {
-            opts.compiler = compileOptimizedSchemaIDL;
+            return compileSchemaIDL(source);
           }
-
-          return optimizeAndCompileSchema(opts);
-        } else if (isJson(source)) {
-          return compileSchemaJson(source);
-        } else {
-          return compileSchemaIDL(source);
+        } else if (hasGraphQLExtension(id)) {
+          return prependFragments(source, id).then((concatenatedSource) => {
+            return compileToModule(concatenatedSource);
+          });
         }
-      } else if (hasGraphQLExtension(id)) {
-        return prependFragments(source, id).then((concatenatedSource) => {
-          return compileToModule(concatenatedSource);
+      }
+
+      const promise = compile();
+
+      if (promise) {
+        return promise.then((code) => {
+          return {
+            code,
+            map: {mappings: ''}
+          };
         });
       }
     }
