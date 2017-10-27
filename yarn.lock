@@ -1608,9 +1608,9 @@ graceful-fs@^4.1.2:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-graphql-js-client-compiler@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/graphql-js-client-compiler/-/graphql-js-client-compiler-0.1.1.tgz#331be217f7535be82c642f9726f433dff9493d5b"
+graphql-js-client-compiler@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/graphql-js-client-compiler/-/graphql-js-client-compiler-0.2.0.tgz#44caf9ef87740eaab76704b182a2eee5b9f6c445"
   dependencies:
     babel-generator "6.25.0"
     babel-types "6.25.0"
@@ -1618,7 +1618,7 @@ graphql-js-client-compiler@0.1.1:
     graphql "0.10.3"
     graphql-js-client "0.7.0"
     graphql-js-schema "0.7.1"
-    graphql-to-js-client-builder "0.0.1"
+    graphql-to-js-client-builder "1.0.0"
     minimist "1.2.0"
     mkdirp "0.5.1"
 
@@ -1641,9 +1641,9 @@ graphql-js-schema@0.7.1:
     rollup "0.36.3"
     tmp "0.0.29"
 
-graphql-to-js-client-builder@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/graphql-to-js-client-builder/-/graphql-to-js-client-builder-0.0.1.tgz#07714ce17f31633d37aa34aacba63449c636ac21"
+graphql-to-js-client-builder@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-to-js-client-builder/-/graphql-to-js-client-builder-1.0.0.tgz#3660e1c1a89422b926b913f3cf72e07fd8b3e99d"
   dependencies:
     babel-generator "6.24.1"
     babel-types "6.24.1"

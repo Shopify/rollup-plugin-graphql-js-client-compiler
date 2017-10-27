@@ -55,7 +55,7 @@ suite('plugin-test', () => {
       return bundle.generate({format: 'es'});
     }).then(({code}) => {
       assertIncludes(code, 'const document = client.document();');
-      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [variables.FancyQuery.id], root => {');
     });
   });
 
@@ -67,7 +67,7 @@ suite('plugin-test', () => {
       return bundle.generate({format: 'es'});
     }).then(({code}) => {
       assertIncludes(code, 'const document = client.document();');
-      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [variables.FancyQuery.id], root => {');
       assertIncludes(code, 'Types.types["Product"] = Product');
       assertIncludes(code, 'Types.types["Collection"] = Collection');
     });
@@ -81,7 +81,7 @@ suite('plugin-test', () => {
       return bundle.generate({format: 'es'});
     }).then(({code}) => {
       assertIncludes(code, 'const document = client.document();');
-      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [variables.FancyQuery.id], root => {');
       assertIncludes(code, 'Types.types["Product"] = Product');
       assertIncludes(code, 'Types.types["Collection"] = Collection');
     });
@@ -95,7 +95,7 @@ suite('plugin-test', () => {
       return bundle.generate({format: 'es'});
     }).then(({code}) => {
       assertIncludes(code, 'const document = client.document();');
-      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [variables.FancyQuery.id], root => {');
       assertIncludes(code, 'document.defineFragment("ProductFragment", "Product"');
     });
   });
@@ -108,7 +108,7 @@ suite('plugin-test', () => {
       return bundle.generate({format: 'es'});
     }).then(({code}) => {
       assertIncludes(code, 'const document = client.document();');
-      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [variables.FancyQuery.id], root => {');
       assertIncludes(code, 'document.defineFragment("ProductFragmentNested", "Product"');
       assertIncludes(code, 'document.defineFragment("ProductFragment", "Product"');
     });
@@ -149,7 +149,7 @@ suite('plugin-test', () => {
       return bundle.generate({format: 'es'});
     }).then(({code}) => {
       assertIncludes(code, 'const document = client.document();');
-      assertIncludes(code, 'document.addQuery("FancyQuery", [client.variable("id", "ID!")], root => {');
+      assertIncludes(code, 'document.addQuery("FancyQuery", [variables.FancyQuery.id], root => {');
       assertIncludes(code, 'Types.types["Product"] = Product');
       assertExcludes(code, 'Types.types["Collection"] = Collection');
     });
