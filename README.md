@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Shopify/rollup-plugin-graphql-js-client-compiler.svg?style=svg)](https://circleci.com/gh/Shopify/rollup-plugin-graphql-js-client-compiler)
+[![Travis](https://travis-ci.com/Shopify/rollup-plugin-graphql-js-client-compiler.svg?branch=master)](https://travis-ci.com/Shopify/rollup-plugin-graphql-js-client-compiler)
 
 # rollup-plugin-graphql-js-client-compiler
 
