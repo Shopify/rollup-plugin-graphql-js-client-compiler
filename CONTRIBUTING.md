@@ -11,7 +11,7 @@ project (and potentially save yourself some time!).
 ## Getting Started
 To start working on the codebase, first fork the repo, then clone it:
 ```
-git clone git@github.com:your-username/rollup-plugin-graphql-js-client-compiler.git
+git clone git@github.com:<your-username>/rollup-plugin-graphql-js-client-compiler.git
 ```
 *Note: replace "your-username" with your Github handle*
 
